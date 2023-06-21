@@ -9,6 +9,15 @@
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <flow name="hello-world-flow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/helloWorld" doc:name="HTTP"/>
+        <logger message="endpoint get the request" level="INFO" doc:name="Logger"/>
+        <flow-ref name="hello-world-set-payload" doc:name="hello-world-set-payload"/>
+    </flow>
+    <flow name="hello-world-set-payload">
+        <set-payload value="Hello World!" doc:name="Set Payload"/>
+    </flow>
     <flow name="echoFlow" doc:name="echoFlow">
         <echo-component/>
     </flow>
